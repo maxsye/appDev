@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../data/database.dart';
 import '../models/exercise.dart';
+import '../providers/exercise_provider.dart';
 
 import '../myUtility.dart';
 
@@ -40,14 +42,28 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final screenHeight = MyUtility(context).screenHeight;
+
     final arguments =
         ModalRoute.of(context).settings.arguments as Map<String, Object>;
     final exerciseName = arguments['title'];
+
     final selectedExercise =
-        Exercises.firstWhere((exercise) => exercise.name == exerciseName);
+        Provider.of<ExerciseProvider>(context)
+            .findByName(exerciseName);
+
     final topAppBar = AppBar(
       title: Text(exerciseName),
       backgroundColor: Theme.of(context).primaryColorDark,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(selectedExercise.favorite ? Icons.star : Icons.star_border),
+          onPressed: () {
+            setState(() {
+              selectedExercise.toggleFavoriteStatus();
+            });
+            }
+        ),
+      ],
     );
 
     String muscleText(Muscle muscle) {

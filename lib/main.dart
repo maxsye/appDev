@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:prototype2/quiz/questions/equipmentq_screen.dart';
+import 'package:provider/provider.dart';
 
-import './screens/exercise_main_screen.dart';
+import './quiz/questions/equipmentq_screen.dart';
+import './providers/exercise_provider.dart';
 import './models/exercise.dart';
 import './data/database.dart';
 import './screens/settings_screen.dart';
@@ -72,97 +73,101 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Workout',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        backgroundColor: Color.fromRGBO(30, 30, 30, 1), //black
-        disabledColor: Color.fromRGBO(76, 4, 4, 1),
-        fontFamily: 'OpenSans',
-        textTheme: ThemeData.dark().textTheme.copyWith(
-              //main text theme
-              title: TextStyle(
-                //header
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-                color: Color.fromRGBO(240, 240, 240, 1),
-              ),
-              body1: TextStyle(
-                //body
-                fontFamily: 'OpenSans',
-                fontSize: 18,
-                color: Color.fromRGBO(240, 240, 240, 1),
-              ),
-              body2: TextStyle(
-                  //subheader
-                  fontFamily: 'OpenSans',
-                  fontSize: 21,
-                  color: Color.fromRGBO(240, 240, 240, 1),
-                  fontWeight: FontWeight.w600),
-              display4: TextStyle(
-                //disabled subheader text (for a button)
-                fontFamily: 'OpenSans',
-                fontSize: 21,
-                color: Colors.grey[800],
-              ),
-            ),
-        appBarTheme: AppBarTheme(
-          //app bar text theme
+    return ChangeNotifierProvider(
+      create: null,
+      builder: (context) => ExerciseProvider(),
+          child: MaterialApp(
+        title: 'Workout',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          backgroundColor: Color.fromRGBO(30, 30, 30, 1), //black
+          disabledColor: Color.fromRGBO(76, 4, 4, 1),
+          fontFamily: 'OpenSans',
           textTheme: ThemeData.dark().textTheme.copyWith(
+                //main text theme
                 title: TextStyle(
+                  //header
                   fontFamily: 'Montserrat',
-                  fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  fontSize: 28,
                   color: Color.fromRGBO(240, 240, 240, 1),
                 ),
+                body1: TextStyle(
+                  //body
+                  fontFamily: 'OpenSans',
+                  fontSize: 18,
+                  color: Color.fromRGBO(240, 240, 240, 1),
+                ),
+                body2: TextStyle(
+                    //subheader
+                    fontFamily: 'OpenSans',
+                    fontSize: 21,
+                    color: Color.fromRGBO(240, 240, 240, 1),
+                    fontWeight: FontWeight.w600),
+                display4: TextStyle(
+                  //disabled subheader text (for a button)
+                  fontFamily: 'OpenSans',
+                  fontSize: 21,
+                  color: Colors.grey[800],
+                ),
               ),
+          appBarTheme: AppBarTheme(
+            //app bar text theme
+            textTheme: ThemeData.dark().textTheme.copyWith(
+                  title: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(240, 240, 240, 1),
+                  ),
+                ),
+          ),
         ),
+        home: QuizMain(_setEquipmentSettings),
+        // routes: {
+        //   ExerciseLists.routeName: (context) => ExerciseLists(),
+        //   ExerciseMainScreen.routeName: (context) => ExerciseMainScreen(),
+        //   ExerciseDetailScreen.routeName: (context) => ExerciseDetailScreen(),
+        // },
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case TabsScreen.routeName:
+              return Platform.isIOS
+                  ? CupertinoPageRoute(
+                      builder: (_) => TabsScreen(), settings: settings)
+                  : MaterialPageRoute(
+                      builder: (_) => TabsScreen(), settings: settings);
+            case ExerciseLists.routeName:
+              return Platform.isIOS
+                  ? CupertinoPageRoute(
+                      builder: (_) => ExerciseLists(_availableExercises),
+                      settings: settings)
+                  : MaterialPageRoute(
+                      builder: (_) => ExerciseLists(_availableExercises),
+                      settings: settings);
+            case ExerciseDetailScreen.routeName:
+              return Platform.isIOS
+                  ? CupertinoPageRoute(
+                      builder: (_) => ExerciseDetailScreen(), settings: settings)
+                  : MaterialPageRoute(
+                      builder: (_) => ExerciseDetailScreen(), settings: settings);
+            case SettingsScreen.routeName:
+              return Platform.isIOS
+                  ? CupertinoPageRoute(
+                      builder: (_) => SettingsScreen(_setEquipmentSettings),
+                      settings: settings)
+                  : MaterialPageRoute(
+                      builder: (_) => SettingsScreen(_setEquipmentSettings),
+                      settings: settings);
+            default:
+              return Platform.isIOS
+                  ? CupertinoPageRoute(
+                      builder: (_) => QuizMain(_setEquipmentSettings), settings: settings)
+                  : CupertinoPageRoute(
+                      builder: (_) => QuizMain(_setEquipmentSettings), settings: settings);
+          }
+        },
       ),
-      home: QuizMain(_setEquipmentSettings),
-      // routes: {
-      //   ExerciseLists.routeName: (context) => ExerciseLists(),
-      //   ExerciseMainScreen.routeName: (context) => ExerciseMainScreen(),
-      //   ExerciseDetailScreen.routeName: (context) => ExerciseDetailScreen(),
-      // },
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case TabsScreen.routeName:
-            return Platform.isIOS
-                ? CupertinoPageRoute(
-                    builder: (_) => TabsScreen(), settings: settings)
-                : MaterialPageRoute(
-                    builder: (_) => TabsScreen(), settings: settings);
-          case ExerciseLists.routeName:
-            return Platform.isIOS
-                ? CupertinoPageRoute(
-                    builder: (_) => ExerciseLists(_availableExercises),
-                    settings: settings)
-                : MaterialPageRoute(
-                    builder: (_) => ExerciseLists(_availableExercises),
-                    settings: settings);
-          case ExerciseDetailScreen.routeName:
-            return Platform.isIOS
-                ? CupertinoPageRoute(
-                    builder: (_) => ExerciseDetailScreen(), settings: settings)
-                : MaterialPageRoute(
-                    builder: (_) => ExerciseDetailScreen(), settings: settings);
-          case SettingsScreen.routeName:
-            return Platform.isIOS
-                ? CupertinoPageRoute(
-                    builder: (_) => SettingsScreen(_setEquipmentSettings),
-                    settings: settings)
-                : MaterialPageRoute(
-                    builder: (_) => SettingsScreen(_setEquipmentSettings),
-                    settings: settings);
-          default:
-            return Platform.isIOS
-                ? CupertinoPageRoute(
-                    builder: (_) => QuizMain(_setEquipmentSettings), settings: settings)
-                : CupertinoPageRoute(
-                    builder: (_) => QuizMain(_setEquipmentSettings), settings: settings);
-        }
-      },
     );
   }
 }

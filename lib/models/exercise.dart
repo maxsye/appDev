@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum ExerciseType {
   Cardio,
   Resistance,
@@ -46,7 +48,7 @@ enum Muscle {
   Neck,
 }
 
-class Exercise {
+class Exercise with ChangeNotifier{
   final String name; //name of the exercise
   final double overall; //overall rating 1-10
   final String image; //image link
@@ -61,8 +63,9 @@ class Exercise {
   final List<String> steps; //how to perform exercise
   final List<String> commonMistakes;
   final List<String> tips;
+  bool favorite;
 
-  const Exercise(
+  Exercise(
     this.name,
     this.overall,
     this.image,
@@ -77,5 +80,11 @@ class Exercise {
     this.steps,
     this.commonMistakes,
     this.tips,
+    {this.favorite = false}
   );
+
+    void toggleFavoriteStatus() {
+      favorite = !favorite;
+      notifyListeners();
+  }
 }

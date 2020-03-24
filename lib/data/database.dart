@@ -1,6 +1,6 @@
 import '../models/exercise.dart';
 
-const Exercises = const [
+final Exercises = [
 //Back
 
   Exercise(
