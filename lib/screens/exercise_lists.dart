@@ -72,12 +72,7 @@ class ExerciseLists extends StatelessWidget {
         itemBuilder: (ctx, index) {
           return ChangeNotifierProvider.value(
             value: exercisesList[index],
-                      child: ExerciseCard(
-              // exercisesList[index].name,
-              // exercisesList[index].overall,
-              // exercisesList[index].image,
-              // exercisesList[index].level,
-            ),
+            child: ExerciseCard(),
           );
         },
         itemCount: exercisesList.length,
