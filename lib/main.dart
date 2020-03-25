@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import './quiz/questions/equipmentq_screen.dart';
 import './providers/exercise_provider.dart';
-import './models/exercise.dart';
-import './data/database.dart';
 import './screens/settings_screen.dart';
 import './screens/tabs_screen.dart';
 import './quiz/quizMain.dart';
@@ -29,48 +26,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Exercise> _availableExercises = Exercises;
-
-  List<String> _getEquipmentNeeded(List<Equipment> equipment) {
-    List<String> output = List<String>();
-    for (int i = 0; i < equipment.length; i++) {
-      if(equipment[i].toString().substring(10) == 'WeightMachine') {
-        output.add('Weight machine');
-      }
-      else if(equipment[i].toString().substring(10) == 'CardioMachine') {
-        output.add('Cardio machine');
-      }
-      else if(equipment[i].toString().substring(10) == 'DualCables') {
-        output.add('Cables');
-      }
-      else if(equipment[i].toString().substring(10) == 'YogaMat') {
-        output.add('Yoga mat');
-      }
-      else if(equipment[i].toString().substring(10) == 'PullUpBar') {
-        output.add('Pull-up bar');
-      }
-      else if (!(equipment[i].toString().substring(10) == 'Bench')) {
-        output.add(equipment[i].toString().substring(10));
-      }
-    }
-    return output;
-  }
-
-  void _setEquipmentSettings() {
-    setState(() {
-      _availableExercises = Exercises.where((exercise) {
-        if (_getEquipmentNeeded(exercise.equipment).isEmpty)
-        {
-          return true;
-        }
-        else if (EquipmentQuestionScreen.selection.contains(_getEquipmentNeeded(exercise.equipment)[0])){
-          return true;
-        }
-        return false;
-      }).toList();
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

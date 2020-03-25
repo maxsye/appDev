@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:prototype2/screens/tabs_screen.dart';
 import '../quiz/questions/goalq_screen.dart';
-import '../screens/exercise_main_screen.dart';
 
 import '../screens/settings_screen.dart';
 import '../myUtility.dart';

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/exercise_provider.dart';
 
 import '../models/exercise.dart';
 import '../myUtility.dart';

@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MyUtility(context).screenHeight;
-    final screenWidth = MyUtility(context).screenWidth;
+    //final screenWidth = MyUtility(context).screenWidth;
 
     final appBar = AppBar(title: Text('Settings'));
 
@@ -78,8 +78,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
 
-    Function() saveEquipmentSettings = Provider.of<ExerciseProvider>(context).setEquipmentSettings();
-
     return Scaffold(
       appBar: appBar,
       drawer: MainDrawer(),
@@ -91,7 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             DifficultyQuestionScreen.selection,
             (context) => DifficultyQuestionScreen(
               () {
-                //saveDifficultySettings();
+                Provider.of<ExerciseProvider>(context).setSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
@@ -104,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _getEquipment(),
             (context) => EquipmentQuestionScreen(
               () {
-                Provider.of<ExerciseProvider>(context).setEquipmentSettings();
+                Provider.of<ExerciseProvider>(context).setSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },

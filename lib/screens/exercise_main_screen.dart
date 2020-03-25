@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../myUtility.dart';
 import './exercise_lists.dart';
-import '../models/exercise.dart';
 
 class ExerciseMainScreen extends StatelessWidget {
   static const routeName = '/exercise-main-screen';

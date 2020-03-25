@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../data/database.dart';
 import '../models/exercise.dart';
 import '../providers/exercise_provider.dart';
 

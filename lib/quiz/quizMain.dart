@@ -45,13 +45,7 @@ class _QuizMainState extends State<QuizMain> {
       setState(() {
         QuizMain._index++;
       });
-    }
-
-    equipmentQuestionFunction() {
-      setState(() {
-        QuizMain._index++;
-      });
-      Provider.of<ExerciseProvider>(context).setEquipmentSettings();
+      Provider.of<ExerciseProvider>(context).setSettings();
     }
 
     void finishQuiz() {
@@ -65,7 +59,7 @@ class _QuizMainState extends State<QuizMain> {
 
     var _questionScreens = [
       DifficultyQuestionScreen(refresh, height, 'Next'),
-      EquipmentQuestionScreen(equipmentQuestionFunction, height, 'Next'),
+      EquipmentQuestionScreen(refresh, height, 'Next'),
       GoalQuestionScreen(refresh, height, 'Next'),
       BodyQuestionScreen(finishQuiz, height, 'Finish'),
     ];

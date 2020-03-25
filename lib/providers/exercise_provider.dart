@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../models/exercise.dart';
 import '../data/database.dart';
 import '../quiz/questions/equipmentq_screen.dart';
+import '../quiz/questions/difficultyq_screen.dart';
 
 class ExerciseProvider with ChangeNotifier {
   List<Exercise> _exercises = Exercises;
@@ -41,27 +41,45 @@ class ExerciseProvider with ChangeNotifier {
     return output;
   }
 
-  List<Exercise> get filteredExercises {
-    _availableExercises = Exercises.where((exercise) {
-      if (_getEquipmentNeeded(exercise.equipment).isEmpty) {
-        return true;
-      } else if (EquipmentQuestionScreen.selection
-          .contains(_getEquipmentNeeded(exercise.equipment)[0])) {
-        return true;
-      }
-      return false;
-    }).toList();
-    return _availableExercises;
+  int _getExerciseLevel(Level level) {
+    switch (level) {
+      case Level.Advanced:
+        return 2;
+      case Level.Intermediate:
+        return 1;
+      case Level.Beginner:
+        return 0;
+      default:
+        return -1;
+    }
   }
 
-  setEquipmentSettings() {
-    print('setcalled');
+  int _convertLevelSelected(String level) {
+    switch (level) {
+      case 'Advanced':
+        return 2;
+      case 'Intermediate':
+        return 1;
+      case 'Beginner':
+        return 0;
+      default:
+        return -1;
+    }
+  }
+
+  List<Exercise> get filteredExercises {
+    return [..._availableExercises];
+  }
+
+  setSettings() {
     _availableExercises = Exercises.where((exercise) {
-      if (_getEquipmentNeeded(exercise.equipment).isEmpty) {
-        return true;
-      } else if (EquipmentQuestionScreen.selection
-          .contains(_getEquipmentNeeded(exercise.equipment)[0])) {
-        return true;
+      if (_getEquipmentNeeded(exercise.equipment).isEmpty ||
+          EquipmentQuestionScreen.selection
+              .contains(_getEquipmentNeeded(exercise.equipment)[0])) {
+        if (_convertLevelSelected(DifficultyQuestionScreen.selection) >=
+            _getExerciseLevel(exercise.level)) {
+          return true;
+        }
       }
       return false;
     }).toList();

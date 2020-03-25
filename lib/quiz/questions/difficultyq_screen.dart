@@ -29,10 +29,6 @@ class _DifficultyQuestionScreenState extends State<DifficultyQuestionScreen> {
       'description': 'I\'m just getting started',
     },
     {
-      'text': 'Novice',
-      'description': 'I\'ve been working out for a few months',
-    },
-    {
       'text': 'Intermediate',
       'description': 'I have made considerable progress',
     },
@@ -71,12 +67,15 @@ class _DifficultyQuestionScreenState extends State<DifficultyQuestionScreen> {
               ),
             ),
             for (var i = 0; i < _difficultyQuestion.length; i++)
-              DifficultyCard(
-                _difficultyQuestion[i]['text'],
-                _difficultyQuestion[i]['description'],
-                refresh,
-                widget.appBarHeight,
-                ValueKey(_difficultyQuestion[i]['text']),
+              Container(
+                child: DifficultyCard(
+                  _difficultyQuestion[i]['text'],
+                  _difficultyQuestion[i]['description'],
+                  refresh,
+                  widget.appBarHeight,
+                  ValueKey(_difficultyQuestion[i]['text']),
+                ),
+                margin: EdgeInsets.only(bottom: screenHeight * 0.04),
               ),
             SizedBox(
               height: screenHeight * 0.07,
