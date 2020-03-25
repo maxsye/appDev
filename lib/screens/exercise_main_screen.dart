@@ -9,10 +9,6 @@ import '../models/exercise.dart';
 class ExerciseMainScreen extends StatelessWidget {
   static const routeName = '/exercise-main-screen';
 
-  final List<Exercise> favorites;
-
-  ExerciseMainScreen(this.favorites);
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MyUtility(context).screenHeight;

@@ -6,12 +6,10 @@ import '../widgets/exercise_card.dart';
 import '../models/exercise.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  final List<Exercise> favorites;
-
-  FavoritesScreen(this.favorites);
 
   @override
   Widget build(BuildContext context) {
+    List<Exercise> favorites = Provider.of<ExerciseProvider>(context).favorites;
     return favorites.isEmpty
         ? Center(
             child: Text('Favorite an exercise by clicking on the star'),

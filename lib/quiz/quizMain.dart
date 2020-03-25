@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/tabs_screen.dart';
+import '../providers/exercise_provider.dart';
 import './questions/difficultyq_screen.dart';
 import './questions/equipmentq_screen.dart';
 import './questions/goalq_screen.dart';
@@ -10,9 +12,6 @@ import './questions/bodyq_screen.dart';
 
 class QuizMain extends StatefulWidget {
   static var _index = 0;
-
-  final Function() _setEquipmentSettings;
-  QuizMain(this._setEquipmentSettings);
 
   @override
   _QuizMainState createState() => _QuizMainState();
@@ -52,7 +51,7 @@ class _QuizMainState extends State<QuizMain> {
       setState(() {
         QuizMain._index++;
       });
-      widget._setEquipmentSettings();
+      Provider.of<ExerciseProvider>(context).setEquipmentSettings();
     }
 
     void finishQuiz() {

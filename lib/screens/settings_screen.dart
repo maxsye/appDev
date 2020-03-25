@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../myUtility.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/exercise_provider.dart';
+import '../myUtility.dart';
 import '../widgets/main_drawer.dart';
 import '../quiz/questions/difficultyq_screen.dart';
 import '../quiz/questions/equipmentq_screen.dart';
@@ -12,9 +14,6 @@ import '../quiz/questions/bodyq_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings-screen';
-
-  final Function saveSettings;
-  SettingsScreen(this.saveSettings);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -79,6 +78,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
 
+    Function() saveEquipmentSettings = Provider.of<ExerciseProvider>(context).setEquipmentSettings();
+
     return Scaffold(
       appBar: appBar,
       drawer: MainDrawer(),
@@ -90,7 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             DifficultyQuestionScreen.selection,
             (context) => DifficultyQuestionScreen(
               () {
-                widget.saveSettings();
+                //saveDifficultySettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
@@ -103,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _getEquipment(),
             (context) => EquipmentQuestionScreen(
               () {
-                widget.saveSettings();
+                Provider.of<ExerciseProvider>(context).setEquipmentSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
@@ -116,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             GoalQuestionScreen.selection,
             (context) => GoalQuestionScreen(
               () {
-                widget.saveSettings();
+                //saveGoalSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
@@ -129,7 +130,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _getBodyStats(),
             (context) => BodyQuestionScreen(
               () {
-                widget.saveSettings();
+                //saveBodySettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },

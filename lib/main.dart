@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
                 ),
           ),
         ),
-        home: QuizMain(_setEquipmentSettings),
+        home: QuizMain(),
         // routes: {
         //   ExerciseLists.routeName: (context) => ExerciseLists(),
         //   ExerciseMainScreen.routeName: (context) => ExerciseMainScreen(),
@@ -140,10 +140,10 @@ class _MyAppState extends State<MyApp> {
             case ExerciseLists.routeName:
               return Platform.isIOS
                   ? CupertinoPageRoute(
-                      builder: (_) => ExerciseLists(_availableExercises),
+                      builder: (_) => ExerciseLists(),
                       settings: settings)
                   : MaterialPageRoute(
-                      builder: (_) => ExerciseLists(_availableExercises),
+                      builder: (_) => ExerciseLists(),
                       settings: settings);
             case ExerciseDetailScreen.routeName:
               return Platform.isIOS
@@ -154,17 +154,17 @@ class _MyAppState extends State<MyApp> {
             case SettingsScreen.routeName:
               return Platform.isIOS
                   ? CupertinoPageRoute(
-                      builder: (_) => SettingsScreen(_setEquipmentSettings),
+                      builder: (_) => SettingsScreen(),
                       settings: settings)
                   : MaterialPageRoute(
-                      builder: (_) => SettingsScreen(_setEquipmentSettings),
+                      builder: (_) => SettingsScreen(),
                       settings: settings);
             default:
               return Platform.isIOS
                   ? CupertinoPageRoute(
-                      builder: (_) => QuizMain(_setEquipmentSettings), settings: settings)
+                      builder: (_) => QuizMain(), settings: settings)
                   : CupertinoPageRoute(
-                      builder: (_) => QuizMain(_setEquipmentSettings), settings: settings);
+                      builder: (_) => QuizMain(), settings: settings);
           }
         },
       ),

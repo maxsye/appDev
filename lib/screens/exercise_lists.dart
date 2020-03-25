@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prototype2/providers/exercise_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../models/exercise.dart';
@@ -6,9 +7,6 @@ import '../widgets/exercise_card.dart';
 
 class ExerciseLists extends StatelessWidget {
   static const routeName = '/exercise-lists';
-
-  final List<Exercise> _availableExercises;
-  ExerciseLists(this._availableExercises);
 
   String muscleText(Muscle muscle) {
     switch (muscle) {
@@ -47,6 +45,8 @@ class ExerciseLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _availableExercises = Provider.of<ExerciseProvider>(context).filteredExercises;
+    
     final routeArguments =
         ModalRoute.of(context).settings.arguments as Map<String, Object>;
 

@@ -1,15 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/exercise_provider.dart';
 import '../myUtility.dart';
 import '../quiz/questions/goalq_screen.dart';
 import '../screens/exercise_main_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../widgets/main_drawer.dart';
-import '../models/exercise.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -19,37 +16,10 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  List<Exercise> favorites;
-
-  Future<List<Exercise>> getFavorites() async {
-    return Future.delayed(Duration(seconds: 1),
-        () => Provider.of<ExerciseProvider>(context).favorites);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getFavorites().then((values) {
-      setState(() {
-        favorites = values;
-      });
-    });
-  }
-
   final List<Map<String, Object>> _pages = [
-    {'title': 'Exercises'},
-    {'title': 'Favorites'},
+    {'page': ExerciseMainScreen(), 'title': 'Exercises'},
+    {'page': FavoritesScreen(), 'title': 'Favorites'},
   ];
-
-  Widget getPage(int index) {
-    if (index == 0) {
-      return ExerciseMainScreen(favorites);
-    }
-    if (index == 1) {
-      return FavoritesScreen(favorites);
-    }
-    return ExerciseMainScreen(favorites);
-  }
 
   var _selectedPageIndex = 0;
 
@@ -88,7 +58,7 @@ class _TabsScreenState extends State<TabsScreen> {
       ),
       drawer: MainDrawer(),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: getPage(_selectedPageIndex),
+      body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
