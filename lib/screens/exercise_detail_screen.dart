@@ -47,7 +47,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
     final exerciseName = arguments['title'];
 
     final selectedExercise =
-        Provider.of<ExerciseProvider>(context)
+        Provider.of<ExerciseProvider>(context, listen: false)
             .findByName(exerciseName);
 
     final topAppBar = AppBar(

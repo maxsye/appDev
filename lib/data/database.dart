@@ -1,6 +1,6 @@
 import '../models/exercise.dart';
 
-final Exercises = [
+final MuscleExercises = [
 //Back
 
   Exercise(
@@ -1405,4 +1405,37 @@ final Exercises = [
       'Do not start out with a heavy weight',
     ],
   ),
+];
+
+final MobilityExercises = [
+  //Back
+
+  Exercise(
+    'Prone Trunk Raise',
+    8.9,
+    'assets/images/sideNeckCurls.jpg',
+    'assets/animations/sideNeckCurls.gif',
+    Level.Beginner,
+    [Equipment.YogaMat],
+    Muscle.Neck,
+    [],
+    false,
+    ExerciseType.Resistance,
+    AxialCompression.None,
+    [
+      'Lay on the bench sideways with your head off the bench',
+      'Load a harness or just hold a plate over your ear',
+      'Lower your neck and pause for a moment',
+      'Slowly flex your neck up and down',
+    ],
+    [
+      'Not using the full range of motion',
+      'Moving too fast',
+    ],
+    [
+      'You can wrap a towel over plate to make this more comfortable',
+      'Do not start out with a heavy weight',
+    ],
+  ),
+
 ];

@@ -22,7 +22,7 @@ class ExerciseCard extends StatefulWidget {
 class _ExerciseCardState extends State<ExerciseCard> {
   @override
   Widget build(BuildContext context) {
-    final exercise = Provider.of<Exercise>(context);
+    final exercise = Provider.of<Exercise>(context, listen: false);
     final screenHeight = Platform.isIOS
         ? MyUtility(context).screenHeight
         : MyUtility(context).screenHeight * 1.35;

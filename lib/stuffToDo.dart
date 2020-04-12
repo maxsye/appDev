@@ -4,7 +4,6 @@
 //Make recommendations based on the quiz options
 //Advanced, ask user to rate the exercise and adjust overall rating based on that
 //Forearm exercises
-//Make sure favorites tab actually shows the favorites
 
 //Icons made by smashicons from www.flaticon.com
 //Icons made by freepik from www.flaticon.com

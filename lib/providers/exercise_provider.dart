@@ -6,8 +6,8 @@ import '../quiz/questions/equipmentq_screen.dart';
 import '../quiz/questions/difficultyq_screen.dart';
 
 class ExerciseProvider with ChangeNotifier {
-  List<Exercise> _exercises = Exercises;
-  List<Exercise> _availableExercises = Exercises;
+  List<Exercise> _exercises = MuscleExercises;
+  List<Exercise> _availableExercises = MuscleExercises;
 
   List<Exercise> get exercises {
     return [..._exercises];
@@ -72,7 +72,7 @@ class ExerciseProvider with ChangeNotifier {
   }
 
   setSettings() {
-    _availableExercises = Exercises.where((exercise) {
+    _availableExercises = _availableExercises.where((exercise) {
       if (_getEquipmentNeeded(exercise.equipment).isEmpty ||
           EquipmentQuestionScreen.selection
               .contains(_getEquipmentNeeded(exercise.equipment)[0])) {

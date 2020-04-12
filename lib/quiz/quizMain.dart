@@ -45,7 +45,7 @@ class _QuizMainState extends State<QuizMain> {
       setState(() {
         QuizMain._index++;
       });
-      Provider.of<ExerciseProvider>(context).setSettings();
+      Provider.of<ExerciseProvider>(context, listen: false).setSettings();
     }
 
     void finishQuiz() {

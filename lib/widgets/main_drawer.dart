@@ -36,6 +36,11 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: <Widget>[
+          // AppBar(
+          //   backgroundColor: Theme.of(context).primaryColor,
+          //   title: Text('Navigation'),
+          //   automaticallyImplyLeading: false,
+          // ),
           Expanded(
             child: Container(
               width: double.infinity,

@@ -89,7 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             DifficultyQuestionScreen.selection,
             (context) => DifficultyQuestionScreen(
               () {
-                Provider.of<ExerciseProvider>(context).setSettings();
+                Provider.of<ExerciseProvider>(context, listen: false).setSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
@@ -102,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _getEquipment(),
             (context) => EquipmentQuestionScreen(
               () {
-                Provider.of<ExerciseProvider>(context).setSettings();
+                Provider.of<ExerciseProvider>(context, listen: false).setSettings();
                 Navigator.pushReplacementNamed(
                     context, SettingsScreen.routeName);
               },
