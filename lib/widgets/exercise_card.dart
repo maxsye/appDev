@@ -116,7 +116,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    'Overall: ${exercise.overall}',
+                    'Overall: ${exercise.overall.toStringAsFixed(1)}',
                   ),
                   Text(
                     '${levelText(exercise.level)}',

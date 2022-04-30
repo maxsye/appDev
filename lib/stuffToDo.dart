@@ -4,6 +4,9 @@
 //Make recommendations based on the quiz options
 //Advanced, ask user to rate the exercise and adjust overall rating based on that
 //Forearm exercises
+//Working with FireBase to save settings and favorites DOING RIGHT NOW, WORK ON THIS
+//add error handling in case user doesn't have internet connection
+
 
 //Icons made by smashicons from www.flaticon.com
 //Icons made by freepik from www.flaticon.com

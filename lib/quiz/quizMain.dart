@@ -18,6 +18,31 @@ class QuizMain extends StatefulWidget {
 }
 
 class _QuizMainState extends State<QuizMain> {
+ var _firstTime = true;
+
+ var _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_firstTime) {
+      setState(() {
+        _isLoading = true;
+        Provider.of<ExerciseProvider>(context).fetchSettings().then((_) {
+          _isLoading = false;
+        });
+      });
+      if (EquipmentQuestionScreen.selection.isNotEmpty)
+    {
+      Navigator.of(context).pushReplacementNamed(
+        TabsScreen.routeName,
+        arguments: {},
+      );
+    }
+    }
+    _firstTime = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -36,7 +61,7 @@ class _QuizMainState extends State<QuizMain> {
         onPressed: () => goBack(),
       ),
       title: Text(
-        'Questions',
+        'FitAssist',
       ),
       backgroundColor: theme.primaryColorDark,
     );
@@ -53,6 +78,7 @@ class _QuizMainState extends State<QuizMain> {
         TabsScreen.routeName,
         arguments: {},
       );
+      Provider.of<ExerciseProvider>(context).setSettings();
     }
 
     double height = topAppBar.preferredSize.height;

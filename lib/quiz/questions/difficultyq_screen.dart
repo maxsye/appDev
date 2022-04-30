@@ -197,9 +197,10 @@ class _DifficultyCardState extends State<DifficultyCard> {
         borderRadius: BorderRadius.circular(
           screenWidth * 0.05,
         ),
+        
       ),
       child: Container(
-        margin: EdgeInsets.only(bottom: screenHeight * .01),
+        margin: EdgeInsets.only(bottom: screenHeight * .01,), //left: screenHeight * .025),
         width: screenWidth * .8,
         height: screenHeight * .15,
         child: Column(

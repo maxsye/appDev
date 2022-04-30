@@ -7,6 +7,7 @@ import '../../myUtility.dart';
 
 class BodyQuestionScreen extends StatefulWidget {
   static var mainButton = false;
+
   static String gender = '';
   static var weight = 180;
   static var height = 69;
@@ -401,8 +402,8 @@ class _GenderCardState extends State<GenderCard> {
         ),
         child: Container(
           padding: EdgeInsets.all(screenHeight * 0.009),
-          width: screenWidth * .217,
-          height: screenHeight * .16,
+          //width: screenWidth * .217,
+          //height: screenHeight * .16,
           child: Column(
             children: <Widget>[
               Text(widget.gender, style: Theme.of(context).textTheme.body1),
